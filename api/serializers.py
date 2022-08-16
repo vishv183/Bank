@@ -52,7 +52,7 @@ class DepositSerializer(serializers.ModelSerializer):
         
     extra_kwargs = {}
 
-class WithdrawSerializer(serializers.Model):
+class WithdrawSerializer(serializers.ModelSerializer):
     class Meta: 
         model = Withdraw
         lookup_field = 'pk'
