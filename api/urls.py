@@ -16,5 +16,6 @@ urlpatterns = [
     path('transaction/<int:pk>/', TransaactionDetail.as_view(), name='transaction-detail'),
     path('transactions/', TransactionList.as_view(), name = 'transaction-list'),
     path('fd/<int:pk>/', FixedDepositDetail.as_view(), name='FixedDeposit-detail'),
-    path('fds/', FixedDepositList.as_view(), name = 'FixedDeposit-list')
+    path('fds/', FixedDepositList.as_view(), name = 'FixedDeposit-list'),
+    path('getuser/', get_user_details, name='get-users')
 ]

@@ -8,12 +8,20 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.urls import reverse
+from api.models import *
+
+
+
 
 
 @login_required(login_url="/login/")
 def index(request):
     context = {'segment': 'index'}
-
+    account = Account.objects.get(user=request.user.id)
+    context['acc_no'] = account.number
+    context['balance'] = account.balance
+    context['ifsc'] = account.ifsc
+    context['account_type'] = account.account_type
     html_template = loader.get_template('home/index.html')
     return HttpResponse(html_template.render(context, request))
 

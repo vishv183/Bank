@@ -6,6 +6,7 @@ from rest_framework.response import Response
 from django.http import HttpResponse
 from datetime import datetime
 from .serializers import *
+from users.models import User
 
 class AccountDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Account.objects.all()
@@ -70,4 +71,16 @@ class FixedDepositList(generics.ListCreateAPIView):
     queryset = FixedDeposit.objects.all()
     serializer_class = FixedDepositSerializer
     permission_classes = [permissions.IsAuthenticated] 
+    
+
+
+@api_view(['GET', ])
+def get_user_details(request):
+    user = User.objects.get(id=int(request.user.id))
+    data = {}
+    data['username'] = user.user_name
+    data['first_name'] = user.first_name
+    data['last_name'] = user.last_name
+    data['email'] = user.email
+    return Response(data)
     

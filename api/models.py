@@ -23,6 +23,7 @@ class Account(models.Model):
     holder_phone = models.CharField(max_length=15)
     holder_phone = models.CharField(max_length=15)
     account_type = models.ForeignKey('AccountType', on_delete=models.CASCADE)
+    user = models.ForeignKey('users.User', on_delete=models.CASCADE, null=True)
 
     class Meta:
         ordering = ['id']

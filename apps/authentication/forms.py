@@ -43,7 +43,7 @@ class SignUpForm(UserCreationForm):
     first_name = forms.CharField(
         widget=forms.TextInput(
             attrs={
-                "placeholder": "John",
+                "placeholder": "First Name",
                 "class": "form-control form-control-lg"
             }
         ))
@@ -51,7 +51,7 @@ class SignUpForm(UserCreationForm):
     last_name = forms.CharField(
     widget=forms.TextInput(
         attrs={
-            "placeholder": "Appleseed",
+            "placeholder": "Last Name",
             "class": "form-control form-control-lg"
         }
     ))
