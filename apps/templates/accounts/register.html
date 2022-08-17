@@ -34,14 +34,24 @@
                 {% csrf_token %}
 
                 <div class="form-group">
-                  {{ form.username }}
+                  {{ form.user_name }}
                 </div>
-                <span class="text-error">{{ form.username.errors }}</span>
+                <span class="text-error">{{ form.user_name.errors }}</span>
 
                 <div class="form-group">
                   {{ form.email }}
                 </div>
                 <span class="text-error">{{ form.email.errors }}</span>
+
+                <div class="form-group">
+                  {{ form.first_name }}
+                </div>
+                <span class="text-error">{{ form.first_name.errors }}</span>
+
+                <div class="form-group">
+                  {{ form.last_name }}
+                </div>
+                <span class="text-error">{{ form.last_name.errors }}</span>
 
                 <div class="form-group">
                   {{ form.password1 }}

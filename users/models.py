@@ -9,6 +9,8 @@ from django.utils.translation import gettext_lazy as _
 
 class CustomUserManager(BaseUserManager):
     def create_user(self, email, user_name, first_name, password, **extra_fields):
+        extra_fields.setdefault('is_active', True)
+
         if not email and not password and not user_name and not first_name:
             raise ValueError(_('Users must have valid email, username, and first name'))
         
