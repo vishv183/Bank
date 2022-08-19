@@ -25,6 +25,16 @@ def index(request):
     html_template = loader.get_template('home/index.html')
     return HttpResponse(html_template.render(context, request))
 
+@login_required(login_url="/login/")
+def index_testing(request):
+    context = {'segment': 'index'}
+    account = Account.objects.get(user=request.user.id)
+    context['acc_no'] = account.number
+    context['balance'] = account.balance
+    context['ifsc'] = account.ifsc
+    context['account_type'] = account.account_type
+    html_template = loader.get_template('home/index-testing.html')
+    return HttpResponse(html_template.render(context, request))
 
 @login_required(login_url="/login/")
 def pages(request):
