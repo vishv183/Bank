@@ -1,12 +1,44 @@
 
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
+          
           <li class="nav-item">
-            <a class="nav-link" href="index.html">
+            <a class="nav-link" href="index-testing.html">
               <i class="mdi mdi-grid-large menu-icon"></i>
-              <span class="menu-title">Dashboard</span>
+              <span class="menu-title">Home</span>
             </a>
           </li>
+          <li class="nav-item nav-category">Services</li>
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+              <i class="menu-icon mdi mdi-currency-inr"></i>
+              <span class="menu-title">Transaction</span>
+              <i class="menu-arrow"></i> 
+            </a>
+            <div class="collapse" id="ui-basic">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item {% if segment == 'withdraw'%} active {% endif %}">
+                  <a class="nav-link" href="{{ request.host }}/withdraw/">
+                    <i class="mdi mdi-cash-multiple menu-icon"></i>
+                    <span class="menu-title">Withdraw</span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="deposit.html">
+                    <i class="mdi mdi-cash-usd menu-icon"></i>
+                    <span class="menu-title">Deposit</span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="transfer.html">
+                    <i class="mdi mdi-square-inc-cash menu-icon"></i>
+                    <span class="menu-title">Transfer</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </li>
+          
 
           <li class="nav-item nav-category">UI Elements</li>
           <li class="nav-item">

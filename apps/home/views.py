@@ -9,6 +9,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.urls import reverse
 from api.models import *
+from django.shortcuts import render
 
 
 
@@ -26,7 +27,7 @@ def index(request):
     return HttpResponse(html_template.render(context, request))
 
 @login_required(login_url="/login/")
-def index_testing(request):
+def home(request):
     context = {'segment': 'index'}
     account = Account.objects.get(user=request.user.id)
     context['acc_no'] = account.number
@@ -35,6 +36,26 @@ def index_testing(request):
     context['account_type'] = account.account_type
     html_template = loader.get_template('home/index-testing.html')
     return HttpResponse(html_template.render(context, request))
+
+
+@login_required(login_url='/login/')
+def withdraw(request):
+    context = {'segment': 'withdraw'}
+    
+    return render(request, 'home/withdraw.html', context)
+    
+@login_required(login_url='/login/')
+def deposit(request):
+    context = {'segment': 'deposit'}
+    
+    return render(request, 'home/deposit.html', context)
+
+@login_required(login_url='/login/')
+def transfer(request):
+    context = {'segment': 'transfer'}
+    
+    return render(request, 'home/transfer.html', context)
+    
 
 @login_required(login_url="/login/")
 def pages(request):
@@ -48,6 +69,7 @@ def pages(request):
         if load_template == 'admin':
             return HttpResponseRedirect(reverse('admin:index'))
         context['segment'] = load_template
+        print(context)
 
         html_template = loader.get_template('home/' + load_template)
         return HttpResponse(html_template.render(context, request))
