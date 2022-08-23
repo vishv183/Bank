@@ -10,7 +10,7 @@ from django.template import loader
 from django.urls import reverse
 from api.models import *
 from django.shortcuts import render
-
+from .forms import *
 
 
 
@@ -38,17 +38,44 @@ def home(request):
     return HttpResponse(html_template.render(context, request))
 
 
+
+
+
 @login_required(login_url='/login/')
 def withdraw(request):
     context = {'segment': 'withdraw'}
     
+    if request.method == 'POST':
+        data = dict(request.POST)
+        
+        account = Account.objects.get(id=int(data['account'][0]))
+        
+        account.balance -= float(data['amount'][0])
+        
+        account.save()
+        
+        withdraw_transaction = Withdraw()
+        withdraw_transaction.account = account
+        withdraw_transaction.amount = float(data['amount'][0])
+        withdraw_transaction.description = data['description'][0]
+        withdraw_transaction.save()
+    
+    form = WithdrawForm(user = request.user)
+    
+    context['form'] = form
+    
     return render(request, 'home/withdraw.html', context)
     
+    
+    
+    
+    
+
 @login_required(login_url='/login/')
 def deposit(request):
     context = {'segment': 'deposit'}
     
-    return render(request, 'home/deposit.html', context)
+    return render(request, 'home/deposit', context)
 
 @login_required(login_url='/login/')
 def transfer(request):
